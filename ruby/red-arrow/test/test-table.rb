@@ -72,6 +72,12 @@ class TableTest < Test::Unit::TestCase
       assert_equal(Arrow::Table.new(schema, [Arrow::UInt8Array.new([1, 2, 3])]),
                    Arrow::Table.new(numbers: array_like))
     end
+
+    test("{} (no columns)") do
+      table = Arrow::Table.new({})
+      assert_equal([0, 0],
+                   [table.n_rows, table.n_columns])
+    end
   end
 
   test("#columns") do

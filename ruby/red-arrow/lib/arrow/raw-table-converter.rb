@@ -48,7 +48,7 @@ module Arrow
         end
         @schema = Schema.new(fields)
       end
-      @n_rows = @values[0].length
+      @n_rows = @values.empty? ? 0 : @values[0].length
     end
   end
 end
