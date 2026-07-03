@@ -1152,6 +1152,19 @@ def test_key_value_metadata():
     assert list(m3.values()) == [b'A', b'B']
     assert len(m3) == 2
 
+    # indexed access to keys and values
+    assert m3.key(0) == b'a'
+    assert m3.key(1) == b'b'
+    assert m3.value(0) == b'A'
+    assert m3.value(1) == b'B'
+
+    # out-of-bounds indices raise IndexError instead of crashing
+    for i in (-1, 2, 100):
+        with pytest.raises(IndexError):
+            m3.key(i)
+        with pytest.raises(IndexError):
+            m3.value(i)
+
     # test duplicate key support
     md = pa.KeyValueMetadata([
         ('a', 'alpha'),

@@ -2390,6 +2390,11 @@ cdef class KeyValueMetadata(_Metadata, Mapping):
         -------
         byte
         """
+        cdef int64_t size = self.metadata.size()
+        if i < 0 or i >= size:
+            raise IndexError(
+                f"KeyValueMetadata.key: index {i} is out of bounds "
+                f"for metadata of size {size}")
         return self.metadata.key(i)
 
     def value(self, i):
@@ -2402,6 +2407,11 @@ cdef class KeyValueMetadata(_Metadata, Mapping):
         -------
         byte
         """
+        cdef int64_t size = self.metadata.size()
+        if i < 0 or i >= size:
+            raise IndexError(
+                f"KeyValueMetadata.value: index {i} is out of bounds "
+                f"for metadata of size {size}")
         return self.metadata.value(i)
 
     def keys(self):
